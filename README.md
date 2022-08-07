@@ -1,9 +1,14 @@
 # PowerBI-Data-Analysis-and-Report-Preparation-Project
 Business intelligence application on sample dataset
+
 # DATASET
 Northwind Dataset
-<picture>
-  <source media="(prefers-color-scheme: dark)" srcset="https://user-images.githubusercontent.com/25423296/163456776-7f95b81a-f1ed-45f7-b7ab-8fa810d529fa.png">
-  <source media="(prefers-color-scheme: light)" srcset="https://user-images.githubusercontent.com/25423296/163456779-a8556205-d0a5-45e2-ac17-42d089e3c3f8.png">
-  <img alt="Shows an illustrated sun in light color mode and a moon with stars in dark color mode." src="https://user-images.githubusercontent.com/25423296/163456779-a8556205-d0a5-45e2-ac17-42d089e3c3f8.png">
-</picture>
+The Northwind database contains the sales data for a fictitious company called Northwind Traders, which imports and exports specialty foods from around the world.
+In this study, it was studied with the excel file obtained using the northwind dataset data.
+ 
+# Get Data
+![Get Data](https://user-images.githubusercontent.com/79374662/183286516-797cb357-4768-4e30-b288-8218adba5874.png)
+Power Bi desktop opens and click on get data
+![Excel Workbook](https://user-images.githubusercontent.com/79374662/183286546-90fa26ff-662a-4a6e-b2c2-c9f96401692a.png)
+Then click on the source from which you want to get data. We will use excel file in our work.
+

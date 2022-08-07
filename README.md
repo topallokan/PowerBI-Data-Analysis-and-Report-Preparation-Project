@@ -49,7 +49,7 @@ in
 **Employees**
 ```
 let
-    Source = Excel.Workbook(File.Contents("C:\Users\okan.topal\Desktop\Data.xlsx"), null, true),
+    Source = Excel.Workbook(File.Contents("Your File Location\Data.xlsx"), null, true),
     Employees_Sheet = Source{[Item="Employees",Kind="Sheet"]}[Data],
     #"Promoted Headers" = Table.PromoteHeaders(Employees_Sheet, [PromoteAllScalars=true]),
     #"Changed Type" = Table.TransformColumnTypes(#"Promoted Headers",{{"EmployeeID", Int64.Type}, {"LastName", type text}, {"FirstName", type text}, {"Title", type text}, {"TitleOfCourtesy", type text}, {"BirthDate", type datetime}, {"HireDate", type datetime}, {"City", type text}, {"Region", type text}, {"PostalCode", type any}, {"Country", type text}, {"HomePhone", type text}, {"Extension", Int64.Type}, {"ReportsTo", type any}}),
@@ -61,7 +61,7 @@ in
 **Employee Territories**
 ```
 let
-    Source = Excel.Workbook(File.Contents("C:\Users\okan.topal\Desktop\Data.xlsx"), null, true),
+    Source = Excel.Workbook(File.Contents("Your File Location\Data.xlsx"), null, true),
     Employees_Sheet = Source{[Item="Employees",Kind="Sheet"]}[Data],
     #"Promoted Headers" = Table.PromoteHeaders(Employees_Sheet, [PromoteAllScalars=true]),
     #"Changed Type" = Table.TransformColumnTypes(#"Promoted Headers",{{"EmployeeID", Int64.Type}, {"LastName", type text}, {"FirstName", type text}, {"Title", type text}, {"TitleOfCourtesy", type text}, {"BirthDate", type datetime}, {"HireDate", type datetime}, {"City", type text}, {"Region", type text}, {"PostalCode", type any}, {"Country", type text}, {"HomePhone", type text}, {"Extension", Int64.Type}, {"ReportsTo", type any}}),
@@ -73,7 +73,7 @@ in
 **Order Details**
 ```
 let
-    Source = Excel.Workbook(File.Contents("C:\Users\okan.topal\Desktop\Data.xlsx"), null, true),
+    Source = Excel.Workbook(File.Contents("Your File Location\Data.xlsx"), null, true),
     #"Order Details_Sheet" = Source{[Item="Order Details",Kind="Sheet"]}[Data],
     #"Promoted Headers" = Table.PromoteHeaders(#"Order Details_Sheet", [PromoteAllScalars=true]),
     #"Changed Type" = Table.TransformColumnTypes(#"Promoted Headers",{{"OrderID", Int64.Type}, {"ProductID", Int64.Type}, {"UnitPrice", type number}, {"Quantity", Int64.Type}, {"Discount", Percentage.Type}}),
@@ -88,7 +88,7 @@ in
 **Orders**
 ```
 let
-    Source = Excel.Workbook(File.Contents("C:\Users\okan.topal\Desktop\Data.xlsx"), null, true),
+    Source = Excel.Workbook(File.Contents("Your File Location\Data.xlsx"), null, true),
     Orders_Sheet = Source{[Item="Orders",Kind="Sheet"]}[Data],
     #"Promoted Headers" = Table.PromoteHeaders(Orders_Sheet, [PromoteAllScalars=true]),
     #"Changed Type" = Table.TransformColumnTypes(#"Promoted Headers",{{"OrderID", Int64.Type}, {"CustomerID", type text}, {"EmployeeID", Int64.Type}, {"OrderDate", type datetime}, {"ShipVia", Int64.Type}, {"Freight", type number}, {"ShipName", type text}, {"ShipAddress", type text}, {"ShipCity", type text}, {"ShipRegion", type text}, {"ShipPostalCode", type any}, {"ShipCountry", type text}})
@@ -99,7 +99,7 @@ in
 **Products**
 ```
 let
-    Source = Excel.Workbook(File.Contents("C:\Users\okan.topal\Desktop\Data.xlsx"), null, true),
+    Source = Excel.Workbook(File.Contents("Your File Location\Data.xlsx"), null, true),
     Products_Sheet = Source{[Item="Products",Kind="Sheet"]}[Data],
     #"Promoted Headers" = Table.PromoteHeaders(Products_Sheet, [PromoteAllScalars=true]),
     #"Changed Type" = Table.TransformColumnTypes(#"Promoted Headers",{{"ProductID", Int64.Type}, {"ProductName", type text}, {"SupplierID", Int64.Type}, {"CategoryID", Int64.Type}, {"QuantityPerUnit", type text}, {"UnitPrice", type number}, {"UnitsInStock", Int64.Type}, {"UnitsOnOrder", Int64.Type}, {"ReorderLevel", Int64.Type}, {"Discontinued", Int64.Type}}),
@@ -113,7 +113,7 @@ in
 **Region**
 ```
 let
-    Source = Excel.Workbook(File.Contents("C:\Users\okan.topal\Desktop\Data.xlsx"), null, true),
+    Source = Excel.Workbook(File.Contents("Your File Location\Data.xlsx"), null, true),
     Region_Sheet = Source{[Item="Region",Kind="Sheet"]}[Data],
     #"Promoted Headers" = Table.PromoteHeaders(Region_Sheet, [PromoteAllScalars=true]),
     #"Changed Type" = Table.TransformColumnTypes(#"Promoted Headers",{{"RegionID", Int64.Type}, {"RegionDescription", type text}})
@@ -124,7 +124,7 @@ in
 **Shippers**
 ```
 let
-    Source = Excel.Workbook(File.Contents("C:\Users\okan.topal\Desktop\Data.xlsx"), null, true),
+    Source = Excel.Workbook(File.Contents("Your File Location\Data.xlsx"), null, true),
     Shippers_Sheet = Source{[Item="Shippers",Kind="Sheet"]}[Data],
     #"Promoted Headers" = Table.PromoteHeaders(Shippers_Sheet, [PromoteAllScalars=true]),
     #"Changed Type" = Table.TransformColumnTypes(#"Promoted Headers",{{"ShipperID", Int64.Type}, {"CompanyName", type text}, {"Phone", type text}})
@@ -135,7 +135,7 @@ in
 **Ships**
 ```
 let
-    Source = Excel.Workbook(File.Contents("C:\Users\okan.topal\Desktop\Data.xlsx"), null, true),
+    Source = Excel.Workbook(File.Contents("Your File Location\Data.xlsx"), null, true),
     Ships_Sheet = Source{[Item="Ships",Kind="Sheet"]}[Data],
     #"Promoted Headers" = Table.PromoteHeaders(Ships_Sheet, [PromoteAllScalars=true]),
     #"Changed Type" = Table.TransformColumnTypes(#"Promoted Headers",{{"OrderID", Int64.Type}, {"ShippedDate", type datetime}, {"CustomerID", type text}, {"EmployeeID", Int64.Type}, {"ShipVia", Int64.Type}})
@@ -146,7 +146,7 @@ in
 **Suppliers**
 ```
 let
-    Source = Excel.Workbook(File.Contents("C:\Users\okan.topal\Desktop\Data.xlsx"), null, true),
+    Source = Excel.Workbook(File.Contents("Your File Location\Data.xlsx"), null, true),
     Suppliers_Sheet = Source{[Item="Suppliers",Kind="Sheet"]}[Data],
     #"Promoted Headers" = Table.PromoteHeaders(Suppliers_Sheet, [PromoteAllScalars=true]),
     #"Changed Type" = Table.TransformColumnTypes(#"Promoted Headers",{{"SupplierID", Int64.Type}, {"CompanyName", type text}, {"ContactName", type text}, {"ContactTitle", type text}, {"Address", type text}, {"City", type text}, {"Region", type text}, {"PostalCode", type any}, {"Country", type text}, {"Phone", type any}, {"Fax", type any}, {"HomePage", type text}})
@@ -157,7 +157,7 @@ in
 **Suppliers**
 ```
 let
-    Source = Excel.Workbook(File.Contents("C:\Users\okan.topal\Desktop\Data.xlsx"), null, true),
+    Source = Excel.Workbook(File.Contents("Your File Location\Data.xlsx"), null, true),
     Suppliers_Sheet = Source{[Item="Suppliers",Kind="Sheet"]}[Data],
     #"Promoted Headers" = Table.PromoteHeaders(Suppliers_Sheet, [PromoteAllScalars=true]),
     #"Changed Type" = Table.TransformColumnTypes(#"Promoted Headers",{{"SupplierID", Int64.Type}, {"CompanyName", type text}, {"ContactName", type text}, {"ContactTitle", type text}, {"Address", type text}, {"City", type text}, {"Region", type text}, {"PostalCode", type any}, {"Country", type text}, {"Phone", type any}, {"Fax", type any}, {"HomePage", type text}})
@@ -168,7 +168,7 @@ in
 **Territories**
 ```
 let
-    Source = Excel.Workbook(File.Contents("C:\Users\okan.topal\Desktop\Data.xlsx"), null, true),
+    Source = Excel.Workbook(File.Contents("Your File Location\Data.xlsx"), null, true),
     Territories_Sheet = Source{[Item="Territories",Kind="Sheet"]}[Data],
     #"Promoted Headers" = Table.PromoteHeaders(Territories_Sheet, [PromoteAllScalars=true]),
     #"Changed Type" = Table.TransformColumnTypes(#"Promoted Headers",{{"TerritoryID", Int64.Type}, {"TerritoryDescription", type text}, {"RegionID", Int64.Type}})
@@ -179,7 +179,7 @@ in
 **Territories**
 ```
 let
-    Source = Excel.Workbook(File.Contents("C:\Users\okan.topal\Desktop\Data.xlsx"), null, true),
+    Source = Excel.Workbook(File.Contents("Your File Location\Data.xlsx"), null, true),
     Territories_Sheet = Source{[Item="Territories",Kind="Sheet"]}[Data],
     #"Promoted Headers" = Table.PromoteHeaders(Territories_Sheet, [PromoteAllScalars=true]),
     #"Changed Type" = Table.TransformColumnTypes(#"Promoted Headers",{{"TerritoryID", Int64.Type}, {"TerritoryDescription", type text}, {"RegionID", Int64.Type}})
@@ -223,15 +223,15 @@ ADDCOLUMNS (
 Segment Table = SUMMARIZE(Orders,Orders[OrderID],"Total Amount", 'Measure Table'[Total Amount])
 )
 ```
-**New Column**
+  **New Column**
 
+   ```
+  Priority = SWITCH(TRUE(),
+  'Segment Table'[Total Amount]> 5000, "High",
+  'Segment Table'[Total Amount] > 1000, "Average",
+  'Segment Table'[Total Amount]  < 1000, "Low")
+ )
  ```
- Priority = SWITCH(TRUE(),
- 'Segment Table'[Total Amount]> 5000, "High",
-'Segment Table'[Total Amount] > 1000, "Average",
-'Segment Table'[Total Amount]  < 1000, "Low")
-)
-```
 
 **Measure Table**
  ```

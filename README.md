@@ -23,6 +23,12 @@ for example use first row as header in this table field click will solve the pro
 
 The changes we make in the Query editor create a code in the M language on the back. This code allows us to structure our data. I will share M codes for changes made to other tables
 
+```
+function test() {
+  console.log("notice the blank line before this function?");
+}
+```
+
 
 
 

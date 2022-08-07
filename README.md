@@ -16,6 +16,14 @@ Then click on the source from which you want to get data. We will use excel file
 and we choose the tables we want.
 ![Select Tables](https://user-images.githubusercontent.com/79374662/183286636-6b98701b-8160-466e-acde-8c95ec0e30b3.PNG)
 
+# Data Preprocessing
+The Query editor opens and previews the data. Tables are made to be related.
+for example use first row as header in this table field click will solve the problem.
+![Use First Head Rows](https://user-images.githubusercontent.com/79374662/183286918-91675893-2313-42a4-8793-25baf3892790.png)
+
+The changes we make in the Query editor create a code in the M language on the back. This code allows us to structure our data. I will share M codes for changes made to other tables
+
+
 
 
 

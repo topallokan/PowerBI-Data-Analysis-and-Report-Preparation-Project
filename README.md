@@ -187,6 +187,67 @@ in
     #"Changed Type"
 ```
 
+# Build Data Model
+Using one-to-many logic, a relationship is established between fact and dimension tables.
+![Model](https://user-images.githubusercontent.com/79374662/183288190-bc77c4ff-d7a5-4437-9df8-ec5e9fe68903.PNG)
+
+# Report Preparing
+
+As a result of all these processes, a file was obtained in which a report could be prepared.
+Dashboards related to customers and their orders were prepared.
+
+**Measurements used in the report**
+
+**DateTable**
+```
+Date = 
+VAR MinYear = YEAR ( MIN ( Orders[OrderDate] ) )
+VAR MaxYear = YEAR ( MAX ( Orders[OrderDate] ) )
+RETURN
+ADDCOLUMNS (
+    FILTER (
+        CALENDARAUTO( ),
+        AND ( YEAR ( [Date] ) >= MinYear, YEAR ( [Date] ) <= MaxYear )
+    ),
+    "Calendar Year", "CY " & YEAR ( [Date] ),
+    "Month Name", FORMAT ( [Date], "mmmm" ),
+    "Month Number", MONTH ( [Date] ),
+    "Weekday", FORMAT ( [Date], "dddd" ),
+    "Weekday number", WEEKDAY( [Date] ),
+    "Quarter", "Q" & TRUNC ( ( MONTH ( [Date] ) - 1 ) / 3 ) + 1
+)
+```
+
+**Segment Table**
+```
+Segment Table = SUMMARIZE(Orders,Orders[OrderID],"Total Amount", 'Measure Table'[Total Amount])
+)
+```
+ ```
+Priority = SWITCH(TRUE(),
+ 'Segment Table'[Total Amount]> 5000, "High",
+'Segment Table'[Total Amount] > 1000, "Average",
+'Segment Table'[Total Amount]  < 1000, "Low")
+)
+```
+
+**Measure Table**
+```
+Average Delivery Time = var a = AVERAGE(Orders[Delivery Time])
+var b = SUMMARIZE(Customers,Customers[ContactName],"delivery time", a)
+
+return AVERAGEX(b,[delivery time])
+```
+```
+Customers Quantity = DISTINCTCOUNT(Customers[CustomerID])
+```
+```
+Delivery Time = DATEDIFF( SUM(Orders[OrderDate]),SUM(Ships[ShippedDate]),DAY)
+```
+
+
+
+
 
 
 

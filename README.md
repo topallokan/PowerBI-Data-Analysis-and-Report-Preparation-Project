@@ -26,13 +26,106 @@ The changes we make in the Query editor create a code in the M language on the b
 **Categories**
 ```
 let
-    Source = Excel.Workbook(File.Contents("C:\Users\okan.topal\Desktop\Data.xlsx"), null, true),
+    Source = Excel.Workbook(File.Contents("Your File Location\Data.xlsx"), null, true),
     Categories_Sheet = Source{[Item="Categories",Kind="Sheet"]}[Data],
     #"Promoted Headers" = Table.PromoteHeaders(Categories_Sheet, [PromoteAllScalars=true]),
     #"Changed Type" = Table.TransformColumnTypes(#"Promoted Headers",{{"CategoryID", Int64.Type}, {"CategoryName", type text}, {"Description", type text}})
 in
     #"Changed Type"
 ```
+**Customers**
+```
+let
+    Source = Excel.Workbook(File.Contents("Your File Location\Data.xlsx"), null, true),
+    Customers_Sheet = Source{[Item="Customers",Kind="Sheet"]}[Data],
+    #"Promoted Headers" = Table.PromoteHeaders(Customers_Sheet, [PromoteAllScalars=true]),
+    #"Changed Type" = Table.TransformColumnTypes(#"Promoted Headers",{{"CustomerID", type text}, {"CompanyName", type text}, {"ContactName", type text}, {"ContactTitle", type text}, {"Address", type text}, {"City", type text}, {"Region", type text}, {"PostalCode", type any}, {"Country", type text}, {"Phone", type text}, {"Fax", type text}}),
+    #"Removed Columns" = Table.RemoveColumns(#"Changed Type",{"Region", "Phone", "Fax"}),
+    #"Removed Duplicates" = Table.Distinct(#"Removed Columns", {"CustomerID"})
+in
+    #"Removed Duplicates"
+```
+
+**Employees**
+```
+let
+    Source = Excel.Workbook(File.Contents("C:\Users\okan.topal\Desktop\Data.xlsx"), null, true),
+    Employees_Sheet = Source{[Item="Employees",Kind="Sheet"]}[Data],
+    #"Promoted Headers" = Table.PromoteHeaders(Employees_Sheet, [PromoteAllScalars=true]),
+    #"Changed Type" = Table.TransformColumnTypes(#"Promoted Headers",{{"EmployeeID", Int64.Type}, {"LastName", type text}, {"FirstName", type text}, {"Title", type text}, {"TitleOfCourtesy", type text}, {"BirthDate", type datetime}, {"HireDate", type datetime}, {"City", type text}, {"Region", type text}, {"PostalCode", type any}, {"Country", type text}, {"HomePhone", type text}, {"Extension", Int64.Type}, {"ReportsTo", type any}}),
+    #"Removed Duplicates" = Table.Distinct(#"Changed Type", {"EmployeeID"})
+in
+    #"Removed Duplicates"
+```
+
+**Employees**
+```
+let
+    Source = Excel.Workbook(File.Contents("C:\Users\okan.topal\Desktop\Data.xlsx"), null, true),
+    Employees_Sheet = Source{[Item="Employees",Kind="Sheet"]}[Data],
+    #"Promoted Headers" = Table.PromoteHeaders(Employees_Sheet, [PromoteAllScalars=true]),
+    #"Changed Type" = Table.TransformColumnTypes(#"Promoted Headers",{{"EmployeeID", Int64.Type}, {"LastName", type text}, {"FirstName", type text}, {"Title", type text}, {"TitleOfCourtesy", type text}, {"BirthDate", type datetime}, {"HireDate", type datetime}, {"City", type text}, {"Region", type text}, {"PostalCode", type any}, {"Country", type text}, {"HomePhone", type text}, {"Extension", Int64.Type}, {"ReportsTo", type any}}),
+    #"Removed Duplicates" = Table.Distinct(#"Changed Type", {"EmployeeID"})
+in
+    #"Removed Duplicates"
+```
+
+**Employee Territories**
+```
+let
+    Source = Excel.Workbook(File.Contents("C:\Users\okan.topal\Desktop\Data.xlsx"), null, true),
+    Employees_Sheet = Source{[Item="Employees",Kind="Sheet"]}[Data],
+    #"Promoted Headers" = Table.PromoteHeaders(Employees_Sheet, [PromoteAllScalars=true]),
+    #"Changed Type" = Table.TransformColumnTypes(#"Promoted Headers",{{"EmployeeID", Int64.Type}, {"LastName", type text}, {"FirstName", type text}, {"Title", type text}, {"TitleOfCourtesy", type text}, {"BirthDate", type datetime}, {"HireDate", type datetime}, {"City", type text}, {"Region", type text}, {"PostalCode", type any}, {"Country", type text}, {"HomePhone", type text}, {"Extension", Int64.Type}, {"ReportsTo", type any}}),
+    #"Removed Duplicates" = Table.Distinct(#"Changed Type", {"EmployeeID"})
+in
+    #"Removed Duplicates"
+```
+
+**Order Details**
+```
+let
+    Source = Excel.Workbook(File.Contents("C:\Users\okan.topal\Desktop\Data.xlsx"), null, true),
+    #"Order Details_Sheet" = Source{[Item="Order Details",Kind="Sheet"]}[Data],
+    #"Promoted Headers" = Table.PromoteHeaders(#"Order Details_Sheet", [PromoteAllScalars=true]),
+    #"Changed Type" = Table.TransformColumnTypes(#"Promoted Headers",{{"OrderID", Int64.Type}, {"ProductID", Int64.Type}, {"UnitPrice", type number}, {"Quantity", Int64.Type}, {"Discount", Percentage.Type}}),
+    #"Added Custom" = Table.AddColumn(#"Changed Type", "Amount", each [UnitPrice] * [Quantity]),
+    #"Added Custom1" = Table.AddColumn(#"Added Custom", "Discounted Amount", each [Amount] * [Discount]),
+    #"Added Custom2" = Table.AddColumn(#"Added Custom1", "Net Amount", each [Amount] - [Discounted Amount]),
+    #"Changed Type1" = Table.TransformColumnTypes(#"Added Custom2",{{"Amount", Int64.Type}, {"Discounted Amount", Int64.Type}, {"Net Amount", Int64.Type}})
+in
+    #"Changed Type1"
+```
+
+**Orders**
+```
+let
+    Source = Excel.Workbook(File.Contents("C:\Users\okan.topal\Desktop\Data.xlsx"), null, true),
+    Orders_Sheet = Source{[Item="Orders",Kind="Sheet"]}[Data],
+    #"Promoted Headers" = Table.PromoteHeaders(Orders_Sheet, [PromoteAllScalars=true]),
+    #"Changed Type" = Table.TransformColumnTypes(#"Promoted Headers",{{"OrderID", Int64.Type}, {"CustomerID", type text}, {"EmployeeID", Int64.Type}, {"OrderDate", type datetime}, {"ShipVia", Int64.Type}, {"Freight", type number}, {"ShipName", type text}, {"ShipAddress", type text}, {"ShipCity", type text}, {"ShipRegion", type text}, {"ShipPostalCode", type any}, {"ShipCountry", type text}})
+in
+    #"Changed Type"
+```
+
+**Products**
+```
+let
+    Source = Excel.Workbook(File.Contents("C:\Users\okan.topal\Desktop\Data.xlsx"), null, true),
+    Products_Sheet = Source{[Item="Products",Kind="Sheet"]}[Data],
+    #"Promoted Headers" = Table.PromoteHeaders(Products_Sheet, [PromoteAllScalars=true]),
+    #"Changed Type" = Table.TransformColumnTypes(#"Promoted Headers",{{"ProductID", Int64.Type}, {"ProductName", type text}, {"SupplierID", Int64.Type}, {"CategoryID", Int64.Type}, {"QuantityPerUnit", type text}, {"UnitPrice", type number}, {"UnitsInStock", Int64.Type}, {"UnitsOnOrder", Int64.Type}, {"ReorderLevel", Int64.Type}, {"Discontinued", Int64.Type}}),
+    #"Merged Queries" = Table.NestedJoin(#"Changed Type", {"CategoryID"}, Categories, {"CategoryID"}, "Categories", JoinKind.LeftOuter),
+    #"Expanded Categories" = Table.ExpandTableColumn(#"Merged Queries", "Categories", {"CategoryName", "Description"}, {"Categories.CategoryName", "Categories.Description"})
+in
+    #"Expanded Categories"
+```
+
+
+
+
+
+
 
 
 

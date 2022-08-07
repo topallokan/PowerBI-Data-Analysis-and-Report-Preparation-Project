@@ -58,18 +58,6 @@ in
     #"Removed Duplicates"
 ```
 
-**Employees**
-```
-let
-    Source = Excel.Workbook(File.Contents("C:\Users\okan.topal\Desktop\Data.xlsx"), null, true),
-    Employees_Sheet = Source{[Item="Employees",Kind="Sheet"]}[Data],
-    #"Promoted Headers" = Table.PromoteHeaders(Employees_Sheet, [PromoteAllScalars=true]),
-    #"Changed Type" = Table.TransformColumnTypes(#"Promoted Headers",{{"EmployeeID", Int64.Type}, {"LastName", type text}, {"FirstName", type text}, {"Title", type text}, {"TitleOfCourtesy", type text}, {"BirthDate", type datetime}, {"HireDate", type datetime}, {"City", type text}, {"Region", type text}, {"PostalCode", type any}, {"Country", type text}, {"HomePhone", type text}, {"Extension", Int64.Type}, {"ReportsTo", type any}}),
-    #"Removed Duplicates" = Table.Distinct(#"Changed Type", {"EmployeeID"})
-in
-    #"Removed Duplicates"
-```
-
 **Employee Territories**
 ```
 let
@@ -120,6 +108,85 @@ let
 in
     #"Expanded Categories"
 ```
+
+
+**Region**
+```
+let
+    Source = Excel.Workbook(File.Contents("C:\Users\okan.topal\Desktop\Data.xlsx"), null, true),
+    Region_Sheet = Source{[Item="Region",Kind="Sheet"]}[Data],
+    #"Promoted Headers" = Table.PromoteHeaders(Region_Sheet, [PromoteAllScalars=true]),
+    #"Changed Type" = Table.TransformColumnTypes(#"Promoted Headers",{{"RegionID", Int64.Type}, {"RegionDescription", type text}})
+in
+    #"Changed Type"
+```
+
+**Shippers**
+```
+let
+    Source = Excel.Workbook(File.Contents("C:\Users\okan.topal\Desktop\Data.xlsx"), null, true),
+    Shippers_Sheet = Source{[Item="Shippers",Kind="Sheet"]}[Data],
+    #"Promoted Headers" = Table.PromoteHeaders(Shippers_Sheet, [PromoteAllScalars=true]),
+    #"Changed Type" = Table.TransformColumnTypes(#"Promoted Headers",{{"ShipperID", Int64.Type}, {"CompanyName", type text}, {"Phone", type text}})
+in
+    #"Changed Type"
+```
+
+**Ships**
+```
+let
+    Source = Excel.Workbook(File.Contents("C:\Users\okan.topal\Desktop\Data.xlsx"), null, true),
+    Ships_Sheet = Source{[Item="Ships",Kind="Sheet"]}[Data],
+    #"Promoted Headers" = Table.PromoteHeaders(Ships_Sheet, [PromoteAllScalars=true]),
+    #"Changed Type" = Table.TransformColumnTypes(#"Promoted Headers",{{"OrderID", Int64.Type}, {"ShippedDate", type datetime}, {"CustomerID", type text}, {"EmployeeID", Int64.Type}, {"ShipVia", Int64.Type}})
+in
+    #"Changed Type"
+```
+
+**Suppliers**
+```
+let
+    Source = Excel.Workbook(File.Contents("C:\Users\okan.topal\Desktop\Data.xlsx"), null, true),
+    Suppliers_Sheet = Source{[Item="Suppliers",Kind="Sheet"]}[Data],
+    #"Promoted Headers" = Table.PromoteHeaders(Suppliers_Sheet, [PromoteAllScalars=true]),
+    #"Changed Type" = Table.TransformColumnTypes(#"Promoted Headers",{{"SupplierID", Int64.Type}, {"CompanyName", type text}, {"ContactName", type text}, {"ContactTitle", type text}, {"Address", type text}, {"City", type text}, {"Region", type text}, {"PostalCode", type any}, {"Country", type text}, {"Phone", type any}, {"Fax", type any}, {"HomePage", type text}})
+in
+    #"Changed Type"
+```
+
+**Suppliers**
+```
+let
+    Source = Excel.Workbook(File.Contents("C:\Users\okan.topal\Desktop\Data.xlsx"), null, true),
+    Suppliers_Sheet = Source{[Item="Suppliers",Kind="Sheet"]}[Data],
+    #"Promoted Headers" = Table.PromoteHeaders(Suppliers_Sheet, [PromoteAllScalars=true]),
+    #"Changed Type" = Table.TransformColumnTypes(#"Promoted Headers",{{"SupplierID", Int64.Type}, {"CompanyName", type text}, {"ContactName", type text}, {"ContactTitle", type text}, {"Address", type text}, {"City", type text}, {"Region", type text}, {"PostalCode", type any}, {"Country", type text}, {"Phone", type any}, {"Fax", type any}, {"HomePage", type text}})
+in
+    #"Changed Type"
+```
+
+**Territories**
+```
+let
+    Source = Excel.Workbook(File.Contents("C:\Users\okan.topal\Desktop\Data.xlsx"), null, true),
+    Territories_Sheet = Source{[Item="Territories",Kind="Sheet"]}[Data],
+    #"Promoted Headers" = Table.PromoteHeaders(Territories_Sheet, [PromoteAllScalars=true]),
+    #"Changed Type" = Table.TransformColumnTypes(#"Promoted Headers",{{"TerritoryID", Int64.Type}, {"TerritoryDescription", type text}, {"RegionID", Int64.Type}})
+in
+    #"Changed Type"
+```
+
+**Territories**
+```
+let
+    Source = Excel.Workbook(File.Contents("C:\Users\okan.topal\Desktop\Data.xlsx"), null, true),
+    Territories_Sheet = Source{[Item="Territories",Kind="Sheet"]}[Data],
+    #"Promoted Headers" = Table.PromoteHeaders(Territories_Sheet, [PromoteAllScalars=true]),
+    #"Changed Type" = Table.TransformColumnTypes(#"Promoted Headers",{{"TerritoryID", Int64.Type}, {"TerritoryDescription", type text}, {"RegionID", Int64.Type}})
+in
+    #"Changed Type"
+```
+
 
 
 

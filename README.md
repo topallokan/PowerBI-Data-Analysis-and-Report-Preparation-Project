@@ -196,7 +196,7 @@ Using one-to-many logic, a relationship is established between fact and dimensio
 As a result of all these processes, a file was obtained in which a report could be prepared.
 Dashboards related to customers and their orders were prepared.
 
-**Measurements used in the report**
+**Measures, Calculated Column and Calculated Tables in the report**
 
 **DateTable**
 ```
@@ -223,8 +223,10 @@ ADDCOLUMNS (
 Segment Table = SUMMARIZE(Orders,Orders[OrderID],"Total Amount", 'Measure Table'[Total Amount])
 )
 ```
+**New Column**
+
  ```
-Priority = SWITCH(TRUE(),
+ Priority = SWITCH(TRUE(),
  'Segment Table'[Total Amount]> 5000, "High",
 'Segment Table'[Total Amount] > 1000, "Average",
 'Segment Table'[Total Amount]  < 1000, "Low")
@@ -232,19 +234,46 @@ Priority = SWITCH(TRUE(),
 ```
 
 **Measure Table**
-```
+ ```
 Average Delivery Time = var a = AVERAGE(Orders[Delivery Time])
 var b = SUMMARIZE(Customers,Customers[ContactName],"delivery time", a)
 
-return AVERAGEX(b,[delivery time])
-```
-```
-Customers Quantity = DISTINCTCOUNT(Customers[CustomerID])
-```
-```
-Delivery Time = DATEDIFF( SUM(Orders[OrderDate]),SUM(Ships[ShippedDate]),DAY)
+return AVERAGEX(b,[Delivery time])
 ```
 
+ ```
+Customers Quantity = DISTINCTCOUNT(Customers[CustomerID])
+```
+
+```
+Delivery time = DATEDIFF( SUM(Orders[OrderDate]),SUM(Ships[ShippedDate]),DAY)
+```
+
+```
+Orders = DISTINCTCOUNT('Order Details'[OrderID])
+```
+
+```
+Total Amount = SUM('Order Details'[Net Amount])
+```
+
+```
+Total Amount - Freight = 'Measure Table'[Total Amount] - SUM(Orders[Freight])
+```
+
+```
+Total Amount - Freight Per Order = DIVIDE( [Total Amount - Freight] , [Orders],BLANK())
+```
+
+```
+Total Order Quantity = COUNT(Orders[OrderID])
+```
+
+**Note :**  Performance increase has been achieved by performing these 3 steps in the power query editor. The earlier the intervention is made at the source of the data, the more beneficial it will be for the report.
+    
+    #"Added Custom" = Table.AddColumn(#"Changed Type", "Amount", each [UnitPrice] * [Quantity]),
+    #"Added Custom1" = Table.AddColumn(#"Added Custom", "Discounted Amount", each [Amount] * [Discount]),
+    #"Added Custom2" = Table.AddColumn(#"Added Custom1", "Net Amount", each [Amount] - [Discounted Amount]),
 
 
 
